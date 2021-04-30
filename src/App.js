@@ -6,7 +6,7 @@ import ebconfig from './ebconfig';
 
 function App() {
   return (
-    <EasybaseProvider ebconfig={ebconfig}>
+    <EasybaseProvider ebconfig={ebconfig} options={{ logging: true }}>
       <HashRouter>
         <div style={{ display: "flex", justifyContent: "space-evenly", borderBottom: "1px grey solid" }}>
           <Link to="/"><h2>Home</h2></Link>
@@ -87,33 +87,28 @@ function AuthButton() {
 }
 
 function Home() {
+  const [data, setData] = useState([]);
+
   const {
-    configureFrame,
-    sync,
-    Frame,
     isUserSignedIn,
-    addRecord
+    dbEventListener,
+    db
   } = useEasybase();
 
   useEffect(() => {
-    configureFrame({ limit: 10, offset: 0, tableName: "REACT DEMO" });
-    sync();
+    db('REACT DEMO').return().limit(10).all()
+      .then(res => setData(res));
   }, [])
 
   const handleStarClick = (ele) => {
     if (isUserSignedIn()) {
-      addRecord({
-        tableName: "USER STARS", newRecord: {
-          product_name: ele.product_name,
-          amazon_link: ele.amazon_link
-        }
-      })
+      db("USER STARS", ).insert({ product_name: ele.product_name, amazon_link: ele.amazon_link }).one();
     }
   }
 
   return (
     <div style={{ display: "flex" }}>
-      {Frame().map(ele =>
+      {data.map(ele =>
         <div className="cardRoot">
           <a href={ele.amazon_link}><img src={ele.demo_image} style={{ objectFit: "contain", height: 270, width: "100%", marginBottom: 10 }} /></a>
           <h4 style={{ textAlign: "center", borderTop: "1px grey solid", paddingTop: 15, margin: 0 }}>{ele.product_name}</h4>
@@ -126,20 +121,20 @@ function Home() {
 }
 
 function Starred() {
+  const [data, setData] = useState([]);
+
   const {
-    configureFrame,
-    sync,
-    Frame,
+    db
   } = useEasybase();
 
   useEffect(() => {
-    configureFrame({ limit: 10, offset: 0, tableName: "USER STARS" });
-    sync();
+    db('USER STARS', true).return().limit(10).all()
+    .then(res => setData(res));
   }, [])
 
   return (
     <div style={{ display: "flex" }}>
-      {Frame().map(ele =>
+      {data.map(ele =>
         <div className="cardRoot" style={{ height: 50, alignItems: "center", justifyContent: "center" }}>
           <a href={ele.amazon_link}>{ele.product_name}</a>
         </div>

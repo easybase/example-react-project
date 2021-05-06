@@ -111,3 +111,14 @@
   padding: 3px;
   margin: 10px;
 }
+
+.insertCardButton {
+  border: 3px dashed #A4C;
+  border-radius: 2px;
+  margin: 30px;
+  width: 270px;
+  color: #A4C;
+  background-color: white;
+  height: 400px;
+  font-size: 20px;
+}

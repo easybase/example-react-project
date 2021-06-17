@@ -44,8 +44,30 @@
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  margin: 30px;
+  margin: 0px 30px;
+  margin-top: 50px;
+  margin-bottom: 0px;
   padding: 0 10px;
+}
+
+.cardRoot a img {
+  object-fit: contain;
+  height: 270px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.cardRoot h4 {
+  text-align: center;
+  border-top: 1px grey solid;
+  padding-top: 15px;
+  margin: 0px;
+}
+
+.cardRoot p {
+  color: green;
+  text-align: end;
+  font-weight: 700;
 }
 
 .cardButton {
@@ -115,10 +137,31 @@
 .insertCardButton {
   border: 3px dashed #A4C;
   border-radius: 2px;
-  margin: 30px;
+  margin: 0px 30px;
+  margin-top: 50px;
+  margin-bottom: 0px;
   width: 270px;
   color: #A4C;
   background-color: white;
   height: 400px;
   font-size: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-evenly;
+  border-bottom: 1px grey solid;
+}
+
+.minPrice {
+  position: absolute;
+  top: 84px;
+  right: 25px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.minPrice input {
+  font-size: 16px;
+  margin-left: 10px;
 }

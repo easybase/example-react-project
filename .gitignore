@@ -23,3 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 ebconfig.js
+
+package-lock.json
